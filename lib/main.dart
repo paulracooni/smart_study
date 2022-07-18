@@ -8,7 +8,7 @@ import 'router/navigations/side_menu_display_mode.dart';
 import 'router/navigations/side_menu_style.dart';
 import 'web_main.dart';
 
-const _seedColor = Color(0x0E4DA4FD);
+const _seedColor = Color(0xFF4DA4FD);
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
       title: 'Smart Care',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: _seedColor, brightness: Brightness.light),
+          seedColor: _seedColor,
+          brightness: Brightness.light,
+        ),
         textTheme: GoogleFonts.notoSansNKoTextTheme(theme.textTheme),
       ),
       home: WebMain(),
