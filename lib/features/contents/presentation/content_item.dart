@@ -1,6 +1,7 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/design/effects.dart';
+import 'package:smart_care/features/contents/presentation/content_view.dart';
 
 class ContentItem extends StatefulWidget {
   /// Element widget of [ContentSelector]
@@ -10,7 +11,7 @@ class ContentItem extends StatefulWidget {
   final String item;
 
   /// A function that call when tap on [SideMenuItem]
-  final Function onTap;
+  final Function(int) onTap;
 
   /// Priority of item to show on [SideMenu], lower value is displayed at the top
   ///
@@ -19,11 +20,14 @@ class ContentItem extends StatefulWidget {
   /// * This value used for page controller index
   final int priority;
 
+  final ValueNotifier<int> controller;
+
   const ContentItem({
     Key? key,
     required this.item,
     required this.onTap,
     required this.priority,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -35,7 +39,23 @@ class _ContentItemState extends State<ContentItem> {
   int currentPage = 0;
 
   T? _nonNullableWrap<T>(T? value) => value;
-
+  @override
+  void initState() {
+    super.initState();
+    _nonNullableWrap(WidgetsBinding.instance)!.addPostFrameCallback((timeStamp) {
+      // set initialPage
+      setState(() {
+        currentPage = widget.controller.value;
+      });
+      if (mounted) {
+        // set controller SideMenuItem page controller callback
+        widget.controller.addListener(() {
+          currentPage = widget.controller.value;
+          setState(() {});
+        });
+      }
+    });
+  }
   Color _setColor() {
     if (widget.priority == currentPage) {
       return Theme.of(context).colorScheme.primaryContainer.withOpacity(0.8);
@@ -49,7 +69,11 @@ class _ContentItemState extends State<ContentItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => widget.onTap,
+      onTap: () {
+        widget.controller.value = widget.priority;
+        currentPage = widget.controller.value;
+        setState(() {});
+      } ,
       onHover: (value) {
         setState(() {isHovered = value;});
       },

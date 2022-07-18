@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/design/effects.dart';
+import 'package:smart_care/features/contents/presentation/content_view.dart';
 
 import 'content_item.dart';
 
@@ -12,10 +13,13 @@ class ContentSelector extends StatefulWidget {
   /// [items] is part of key value of contents.
   final List<String> items;
 
-  const ContentSelector({
+  ValueNotifier<int> controller;
+
+  ContentSelector({
     Key? key,
     required this.name,
     required this.items,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -56,7 +60,9 @@ class _ContentSelectorState extends State<ContentSelector> {
             return ContentItem(
               item: item,
               priority: index,
-              onTap: () {},
+              onTap: (tappedIndex) {
+              },
+              controller: widget.controller,
             );
           }).toList()
         ],
