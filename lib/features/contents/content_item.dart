@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/design/effects.dart';
-import 'package:smart_care/features/contents/presentation/content_view.dart';
+import 'package:smart_care/features/contents/content_view.dart';
 
 class ContentItem extends StatefulWidget {
   /// Element widget of [ContentSelector]

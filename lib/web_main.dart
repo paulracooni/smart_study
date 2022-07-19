@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_care/features/contents/presentation/content_view.dart';
+import 'package:smart_care/features/contents/content_view.dart';
 
 import 'router/navigations/side_menu_display_mode.dart';
 import 'router/routing_pages.dart';
@@ -90,6 +90,11 @@ class WebMain extends StatelessWidget {
               controller: RoutingPages.pageController,
               children: [
                 ContentView(),
+                Container(
+                  child: Center(
+                    child: Text('Recordings'),
+                  ),
+                ),
                 Container(
                   child: Center(
                     child: Text('Settings'),

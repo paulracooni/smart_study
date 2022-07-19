@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:smart_care/constants/design/effects.dart';
-import 'package:smart_care/features/contents/presentation/content_view.dart';
 
+import 'content_view.dart';
 import 'content_item.dart';
 
 // ignore: must_be_immutable
 class ContentSelector extends StatefulWidget {
-
   /// [name] will be displayed at Header of [ContentSelector].
   final String name;
 
@@ -27,7 +27,6 @@ class ContentSelector extends StatefulWidget {
 }
 
 class _ContentSelectorState extends State<ContentSelector> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,19 +51,32 @@ class _ContentSelectorState extends State<ContentSelector> {
           Divider(
             height: 5,
             thickness: 5,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context)
+                .colorScheme
+                .onBackground
+                .withOpacity(0.8),
           ), //@TODO: 왜 디바이더가 안보이지?
-          ...widget.items.asMap().entries.map((entry) {
-            int index = entry.key;
-            String item = entry.value;
-            return ContentItem(
-              item: item,
-              priority: index,
-              onTap: (tappedIndex) {
-              },
-              controller: widget.controller,
-            );
-          }).toList()
+
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              controller: ScrollController(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.items.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  String item = entry.value;
+                  return ContentItem(
+                    item: item,
+                    priority: index,
+                    onTap: (tappedIndex) {},
+                    controller: widget.controller,
+                  );
+                }).toList(),
+              ),
+            ),
+          )
         ],
       ),
     );

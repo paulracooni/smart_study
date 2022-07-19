@@ -16,13 +16,16 @@ class RoutingPages {
       SideMenuItem(
         priority: 1,
         title: 'Recordings',
-        onTap: () => {},
+
+
+
+        onTap: () => pageController.jumpToPage(1),
         icon: Icon(Icons.bookmark),
       ),
       SideMenuItem(
         priority: 2,
         title: 'Settings',
-        onTap: () {},
+        onTap: () => pageController.jumpToPage(2),
         icon: Icon(Icons.settings),
       ),
     ];

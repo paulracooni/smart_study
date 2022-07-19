@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/content_datas.dart';
 import 'package:smart_care/constants/design/effects.dart';
-import 'package:smart_care/features/contents/presentation/content_selector.dart';
+import 'package:smart_care/features/contents/content_selector.dart';
+
+import 'content_preview.dart';
 
 class ContentSelectController {
   int index;
@@ -65,12 +67,18 @@ class _ContentViewState extends State<ContentView> {
 
         // Contents Preview
         Expanded(
-            child: Center(
-          child: Text(
-              "${contentLevels[levelController.value]}\n"
-              "${contentBook[bookController.value]}\n"
-              "${contentChapter[chapterController.value]}"),
-        ))
+          child: ContentPreview(
+            headerTitle:
+                "${contentLevels[levelController.value]} /"
+                "${contentBook[bookController.value]} /"
+                "${contentChapter[chapterController.value]}",
+            sentences: const [
+              "안녕",
+              "너는보니?",
+              "반갑다",
+            ],
+          ),
+        )
       ],
     );
   }
