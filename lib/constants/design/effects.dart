@@ -9,7 +9,7 @@ class Effects {
         color: shadowColor,
         spreadRadius: 0,
         blurRadius: 2,
-        offset: Offset(0, 2), // changes position of shadow
+        offset: const Offset(0, 2), // changes position of shadow
       ),
     ];
   }

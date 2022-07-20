@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/content_datas.dart';
-import 'package:smart_care/constants/design/effects.dart';
 import 'package:smart_care/features/contents/content_selector.dart';
 
 import 'content_preview.dart';
@@ -68,6 +67,7 @@ class _ContentViewState extends State<ContentView> {
         // Contents Preview
         Expanded(
           child: ContentPreview(
+            onPressed: () {},
             headerTitle:
                 "${contentLevels[levelController.value]} /"
                 "${contentBook[bookController.value]} /"

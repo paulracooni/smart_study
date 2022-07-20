@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:smart_care/constants/design/effects.dart';
-
-import 'content_view.dart';
 import 'content_item.dart';
 
 // ignore: must_be_immutable

@@ -58,10 +58,10 @@ class WebMain extends StatelessWidget {
               controller: RoutingPages.pageController,
 
               /// Will shows on top of all items, it can be a logo or a Title text
-              title: this._sideTitle(context),
+              title: _sideTitle(context),
 
               /// Will show on bottom of SideMenu when displayMode was SideMenuDisplayMode.open
-              footer: Text(_version),
+              footer: const Text(_version),
 
               /// Notify when display mode changed
               onDisplayModeChanged: (mode) {},
@@ -70,7 +70,7 @@ class WebMain extends StatelessWidget {
               items: RoutingPages.items,
               style: SideMenuStyle(
                 displayMode: SideMenuDisplayMode.auto,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 openSideMenuWidth: 200,
                 compactSideMenuWidth: 46,
                 hoverColor: colorScheme.onBackground.withOpacity(0.1),
@@ -88,17 +88,13 @@ class WebMain extends StatelessWidget {
           Expanded(
             child: PageView(
               controller: RoutingPages.pageController,
-              children: [
+              children: const [
                 ContentView(),
-                Container(
-                  child: Center(
-                    child: Text('Recordings'),
-                  ),
+                Center(
+                  child: Text('Recordings'),
                 ),
-                Container(
-                  child: Center(
-                    child: Text('Settings'),
-                  ),
+                Center(
+                  child: Text('Settings'),
                 ),
               ],
             ),

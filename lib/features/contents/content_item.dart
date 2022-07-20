@@ -1,7 +1,6 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/design/effects.dart';
-import 'package:smart_care/features/contents/content_view.dart';
 
 class ContentItem extends StatefulWidget {
   /// Element widget of [ContentSelector]
@@ -104,7 +103,7 @@ class _ContentItemState extends State<ContentItem> {
                   size: 28,
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(widget.item,
