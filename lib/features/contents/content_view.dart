@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/content_datas.dart';
 import 'package:smart_care/features/contents/content_selector.dart';
+import 'package:smart_care/features/recording/recording_view.dart';
 
 import 'content_preview.dart';
 
@@ -67,7 +68,11 @@ class _ContentViewState extends State<ContentView> {
         // Contents Preview
         Expanded(
           child: ContentPreview(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const RecordingView())
+              );
+            },
             headerTitle:
                 "${contentLevels[levelController.value]} /"
                 "${contentBook[bookController.value]} /"

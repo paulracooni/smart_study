@@ -15,13 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Smart Care',
+      title: 'Smart English',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: _seedColor,
           brightness: Brightness.light,
         ),
-        textTheme: GoogleFonts.notoSansNKoTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.notoSansNKoTextTheme(
+            Theme.of(context).textTheme
+        ),
       ),
       home: const WebMain(),
     );
