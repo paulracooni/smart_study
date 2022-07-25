@@ -49,6 +49,8 @@ class ContentPreview extends StatelessWidget {
 
   Widget _preview(BuildContext context) {
     return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      controller: ScrollController(),
       child: Padding(
         padding: const EdgeInsets.only(top: 2.0),
         child: Column(
@@ -111,8 +113,7 @@ class ContentPreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _header(context),
-          _preview(context),
-          const Spacer(),
+          Expanded(child: _preview(context)),
           _startBtn(context),
         ],
       ),

@@ -1,10 +1,17 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'features/study/video_screen.dart';
 import 'web_main.dart';
 
 const _seedColor = Color(0xFF4DA4FD);
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras(); // From video_screen.dart
+
   runApp(const MyApp());
 }
 
