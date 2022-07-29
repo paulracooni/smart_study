@@ -4,6 +4,7 @@ import 'package:smart_care/features/study/study_controller.dart';
 
 // ignore: must_be_immutable
 class ControlView extends StatelessWidget {
+  //List<Model> -> 데이터관점........ -(map)-> 위젯으로 탈바꿈.
   StudyController controller;
 
   ControlView({Key? key, required this.controller}) : super(key: key);
@@ -14,6 +15,7 @@ class ControlView extends StatelessWidget {
   Widget modeSelectBtns(BuildContext context) {
     return Row(
       children: [
+        //TODO: iterable -> List,Set을 만들기 전단계.
         ElevatedButton(
           style: controller.isRandomBtnActive
               ? BtnStyles(context).active
@@ -33,15 +35,22 @@ class ControlView extends StatelessWidget {
               controller.isSpeedBtnActive ? controller.toggleSpeedMode : () {},
           child: Text("Speed x${controller.speed.toString()}"),
         )
-      ].map((child) {
-        // Add padding to all children of mode select buttons
-        return Padding(
-          padding: btnPadding,
-          child: child,
-        );
-      }).toList(),
+      ].map(padding).toList(),
+
+      //Function toElement; //매개변수
+      //T Function(E e) toElement; //매개변수 (권장)
+      //T toElement(E e); //매개변수
+
+
 
       ///TODO: Iterable 익명 함수는 어떻게 선언하는가? yield?
+    );
+  }
+
+  Widget padding(Widget child){
+    return Padding(
+      padding: btnPadding,
+      child: child,
     );
   }
 

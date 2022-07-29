@@ -39,6 +39,7 @@ dependencies:
   path:
   path_provider: ^2.0.11
   camera: ^0.10.0
+  universal_html: ^2.0.8
 
 dev_dependencies:
   flutter_test:

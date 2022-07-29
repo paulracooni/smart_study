@@ -49,10 +49,8 @@ class WebMain extends StatelessWidget {
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 2),
-            //@TODO: Row 그려지는 순서에 따라, 그림자가 가려지는데 이거 어떻게 처리하는지..?
-            //일단은 어쩔 수 없이 Padding을 삽입함
+          Card(
+            elevation: 5,
             child: SideMenu(
               /// Page controller to manage a PageView
               controller: RoutingPages.pageController,

@@ -1,0 +1,4 @@
+- 플루터에서 제공하는 실행 방식. debug, release, profile.
+- 내가 플루터를 debug, release로 실행했다면,.... (cli적으로.....)
+- 플루터 코드내에서,
+- bool isRelease = kReleaseMode;

@@ -15,21 +15,20 @@ class StudyView extends StatefulWidget {
 }
 
 class _StudyViewState extends State<StudyView> {
-  StudyController controller = StudyController(
-    sentencesLength: sentences.length
-  );
+  late StudyController studyController;
 
   @override
   void initState() {
     super.initState();
+
+    studyController = StudyController(sentencesLength: sentences.length);
     if (mounted) {
       // set controller SideMenuItem page controller callback
-      controller.addListener(() {
+      studyController.addListener(() {
         setState(() {});
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +52,13 @@ class _StudyViewState extends State<StudyView> {
                 flex: 1,
                 child: Column(
                   children: [
-                    Expanded(child: Center(child: VideoScreen())),
-                    ControlView(controller: controller),
+                    Expanded(
+                        child: Center(
+                      child: VideoScreen(
+                        controller: studyController,
+                      ),
+                    )),
+                    ControlView(controller: studyController),
                   ],
                 ),
               ),

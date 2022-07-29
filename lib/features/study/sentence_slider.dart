@@ -19,6 +19,9 @@ class SentenceSlider extends StatefulWidget {
 class _SentenceSliderState extends State<SentenceSlider> {
   @override
   Widget build(BuildContext context) {
+    // @TODO: 스크롤이 Listener에 의해 위치가 바뀌게 하는 방법?
+    // flag를 하나두세요.
+    // flag에 따라서, a version, b version.
     return SingleChildScrollView(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

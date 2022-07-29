@@ -50,23 +50,29 @@ class _ContentViewState extends State<ContentView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Contents Selector
-        ContentSelector(
-          name: "Level",
-          items: contentLevels,
-          controller: levelController,
+        Expanded(
+          child: ContentSelector(
+            name: "Level",
+            items: contentLevels,
+            controller: levelController,
+          ),
         ),
-        ContentSelector(
-          name: "Book",
-          items: contentBook,
-          controller: bookController,
+        Expanded(
+          child: ContentSelector(
+            name: "Book",
+            items: contentBook,
+            controller: bookController,
+          ),
         ),
-        ContentSelector(
-            name: "Chapter",
-            items: contentChapter,
-            controller: chapterController),
-
+        Expanded(
+          child: ContentSelector(
+              name: "Chapter",
+              items: contentChapter,
+              controller: chapterController),
+        ),
         // Contents Preview
         Expanded(
+          flex: 3,
           child: ContentPreview(
             onPressed: () {
               Navigator.of(context).push(

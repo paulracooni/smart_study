@@ -45,14 +45,14 @@ class _ContentSelectorState extends State<ContentSelector> {
                       .withOpacity(0.8)),
             ),
           ),
-          Divider(
-            height: 5,
-            thickness: 5,
+          Divider( //Divier, VerticalDivider.
+            height: 1,
+            thickness: 1,
             color: Theme.of(context)
                 .colorScheme
                 .onBackground
-                .withOpacity(0.8),
-          ), //@TODO: 왜 디바이더가 안보이지?
+                .withOpacity(0.2),
+          ),
 
           Expanded(
             child: SingleChildScrollView(

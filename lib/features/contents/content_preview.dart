@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/design/effects.dart';
 
@@ -18,7 +19,8 @@ class ContentPreview extends StatelessWidget {
         Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             );
-
+    /// @TODO: Widget의 크기에 따라 동적으로 Font 크기 변경이 가능한가?
+    /// @TODO: Widget의 크기를 알아내는 방법?
     return Container(
       // padding: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
@@ -81,7 +83,7 @@ class ContentPreview extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: ElevatedButton(
-            onPressed: onPressed, //@TODO: 왜 Flutter는 this를 명시적으로 작성하는 것을 권장하지 않는가? ㅠㅠ 난 안쓰면 헷갈린데...
+            onPressed: this.onPressed, //@TODO: 왜 Flutter는 this를 명시적으로 작성하는 것을 권장하지 않는가? ㅠㅠ 난 안쓰면 헷갈린데...
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
                 Theme.of(context).colorScheme.tertiary,
