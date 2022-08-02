@@ -58,6 +58,7 @@ class _AnimatedNavLeftState extends State<AnimatedNavLeft> {
       child: Stack(
         children: [
           SingleChildScrollView(
+            controller: ScrollController(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

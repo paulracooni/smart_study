@@ -9,6 +9,7 @@ import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
 import 'common_widgets/home_page.dart';
 
 
+import 'features/contents/bloc/ContentsBloc.dart';
 import 'routes/route_name.dart';
 import 'routes/route_generator.dart';
 
@@ -20,6 +21,7 @@ Future<void> main() async {
   runApp(MultiBlocProvider(
     providers: [
       NavBloc.provider,
+      ContentsBloc.provider,
     ],
     child: const MyApp(),
   ));

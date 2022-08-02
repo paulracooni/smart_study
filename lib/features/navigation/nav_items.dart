@@ -14,7 +14,7 @@ class NavItem {
 const List<NavItem> navItems = [
   NavItem(
     icon: Icons.home,
-    name: "Study",
+    name: "Contents",
     navIndex: 0,
   ),
   NavItem(

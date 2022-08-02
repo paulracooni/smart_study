@@ -7,7 +7,7 @@ class ContentSelector extends StatefulWidget {
   /// [name] will be displayed at Header of [ContentSelector].
   final String name;
 
-  /// [items] is part of key value of contents.
+  /// [items] is part of key value of contents_old.
   final List<String> items;
 
   ValueNotifier<int> controller;

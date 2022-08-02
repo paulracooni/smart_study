@@ -5,11 +5,7 @@ import 'package:smart_care/features/navigation/animated_nav_left.dart';
 import 'package:smart_care/features/navigation/animated_nav_bottom.dart';
 import 'package:smart_care/constants/display_mode.dart';
 
-const onBoardPages = [
-  Center(child: Text('Study')),
-  Center(child: Text('Recordings')),
-  Center(child: Text('My Page')),
-];
+import 'contents/contents.dart';
 
 class OnBoard extends StatelessWidget {
   const OnBoard({Key? key}) : super(key: key);
@@ -17,7 +13,7 @@ class OnBoard extends StatelessWidget {
   Widget navPage(int navIndex){
     switch (navIndex){
       case 0:
-        return const Center(child: Text('Study'));
+        return const Contents();
       case 1:
         return const Center(child: Text('Recordings'));
       case 2:

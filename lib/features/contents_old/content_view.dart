@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/content_datas.dart';
-import 'package:smart_care/features/contents/content_selector.dart';
+import 'package:smart_care/features/contents_old/content_selector.dart';
 import 'package:smart_care/features/study_old/study_view.dart';
 
 import 'content_preview.dart';
