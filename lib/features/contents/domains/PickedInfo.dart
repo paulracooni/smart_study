@@ -8,22 +8,22 @@ class ContentsSelectionHeader {
   static const String chapter = 'Chapter';
 
 }
-class ContentsSelectionAPI extends Equatable {
+class PickedInfo extends Equatable {
   /// Server로 부터 Contents를 불러오고 선택하면 갱신하고 이것저것 한다.
   /// User의 마지막 진행 상황을 API로 부터 전달 받음
   /// Level 선택 시 Books Update;
   /// Books 선택 시, Chapter Update
   /// Chapter Update 시 Contents Update
 
-  ContentsSelectionAPI({required authToken}) : _authToken = authToken {
+  PickedInfo({required authToken}) : _authToken = authToken {
     //@TODO:  _authToken을 레퍼런스로 초기 상태 값을 불러온다.
-    _levels = contentLevels;
-    _books = contentBook;
-    _chapters = contentChapter;
-    _sentences = contentSentences;
-    _indexLevel = 0;
-    _indexBook = 0;
-    _indexChapter = 0;
+    _levels = contentLevels;  //@TODO API에서 contentLevels 불러오기
+    _books = contentBook; //@TODO API에서 contentBook 불러오기
+    _chapters = contentChapter; //@TODO API에서 contentChapter 불러오기
+    _sentences = contentSentences; //@TODO API에서 contentSentences 불러오기
+    _indexLevel = 0; //@TODO API에서 _indexLevel 불러오기
+    _indexBook = 0; //@TODO API에서 _indexBook 불러오기
+    _indexChapter = 0; //@TODO API에서 _indexChapter 불러오기
   }
 
   // @TODO API 정의 시, UserID로 컨텐츠 갱신
@@ -74,18 +74,18 @@ class ContentsSelectionAPI extends Equatable {
   }
 
   Future<void> _updateBooksBy(int indexLevel) async {
-    _books = contentBook;
+    _books = contentBook; //@TODO API에서 contentsBook 불러오기
     indexBook = 0;
   }
 
   Future<void> _updateChaptersBy(int indexLevel, int indexBook) async {
-    _chapters = contentChapter;
+    _chapters = contentChapter; //@TODO API에서 contentChapter 불러오기
     indexChapter = 0;
   }
 
   Future<void> _updateSentencesBy(
       int indexLevel, int indexBook, int indexChapter) async {
-    _sentences = contentSentences;
+    _sentences = contentSentences; //@TODO API에서 contentSentences 불러오기
   }
 
   List<String> getListByHeaderName(String headerName) {
@@ -127,6 +127,13 @@ class ContentsSelectionAPI extends Equatable {
         break;
     }
   }
+
+  String getCurrentPick(){
+    return "${levels[indexLevel]}/"
+           "${books[indexBook]}/"
+           "${chapters[indexChapter]}";
+  }
+
   @override
   List<Object?> get props => [
         _levels,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_care/constants/content_datas.dart';
 import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/contents/bloc/ContentsBloc.dart';
-import 'package:smart_care/features/contents/domains/ContentsSelectionAPI.dart';
+import 'package:smart_care/features/contents/domains/PickedInfo.dart';
 import 'package:smart_care/features/contents/widgets/ContentsSlider.dart';
 
 class ContentsPicker extends StatelessWidget {
@@ -19,15 +19,15 @@ class ContentsPicker extends StatelessWidget {
       children: [
         ContentsSlider(
           headerName: ContentsSelectionHeader.level,
-          itemNames: contentsBloc.contentsSelection.levels,
+          itemNames: contentsBloc.pickedInfo.levels,
         ),
         ContentsSlider(
           headerName: ContentsSelectionHeader.book,
-          itemNames: contentsBloc.contentsSelection.books,
+          itemNames: contentsBloc.pickedInfo.books,
         ),
         ContentsSlider(
           headerName: ContentsSelectionHeader.chapter,
-          itemNames: contentsBloc.contentsSelection.chapters,
+          itemNames: contentsBloc.pickedInfo.chapters,
         ),
       ],
     );

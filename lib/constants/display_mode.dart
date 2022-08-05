@@ -7,7 +7,7 @@ enum DisplayMode {
 extension DisplayModeSelection on MediaQueryData {
   DisplayMode get displayMode{
     late DisplayMode displayMode;
-    if (size.width > 1024) {
+    if (size.width > 1125) {
       displayMode = DisplayMode.DESKTOP;
     }
     else if (size.width > 768){

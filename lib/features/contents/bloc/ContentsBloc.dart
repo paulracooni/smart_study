@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_care/features/contents/bloc/ContentsEvent.dart';
 import 'package:smart_care/features/contents/bloc/ContentsState.dart';
-import 'package:smart_care/features/contents/domains/ContentsSelectionAPI.dart';
+import 'package:smart_care/features/contents/domains/PickedInfo.dart';
 
 class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
-  final contentsSelection = ContentsSelectionAPI(authToken: "?????");
+  final pickedInfo = PickedInfo(authToken: "?????");
 
   ContentsBloc() : super(ContentsInitState()) {
     on<UpdateIndexEvent>((event, emit) {
-      contentsSelection.updateIndexByHeaderName(
+      pickedInfo.updateIndexByHeaderName(
           event.headerName, event.index
       );
       emit(IndexUpdatedState());

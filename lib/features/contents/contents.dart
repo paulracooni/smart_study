@@ -4,6 +4,7 @@ import 'package:smart_care/features/contents/bloc/ContentsBloc.dart';
 
 import 'bloc/ContentsState.dart';
 import 'widgets/ContentsPicker.dart';
+import 'widgets/ContentsPreview.dart';
 
 class Contents extends StatefulWidget {
   const Contents({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _ContentsState extends State<Contents> {
           :Axis.vertical,
         children: const [
           ContentsPicker(),
-          Expanded(child: Center(child: Text("Contents Preview"))),
+          Expanded(child: ContentsPreview(),),
         ],
       );
     });

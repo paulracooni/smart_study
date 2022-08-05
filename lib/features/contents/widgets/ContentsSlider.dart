@@ -24,7 +24,7 @@ class ContentsSlider extends StatelessWidget {
     return Container(
       margin: isDesktop(context)
           ? const EdgeInsets.symmetric(horizontal: 3.0)
-          : const EdgeInsets.fromLTRB(3.0, 0, 0, 3.0),
+          : const EdgeInsets.fromLTRB(3.0, 0, 3.0, 3.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondaryContainer,
         boxShadow: Effects.boxShadowEffect(context),
@@ -35,8 +35,17 @@ class ContentsSlider extends StatelessWidget {
       child: Flex(
           textBaseline: TextBaseline.alphabetic,
           direction: isDesktop(context) ? Axis.vertical : Axis.horizontal,
+          mainAxisAlignment: isDesktop(context)
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
+          crossAxisAlignment: isDesktop(context)
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            Container(
+              padding: isDesktop(context)
+                  ? const EdgeInsets.only(top: 25)
+                  : const EdgeInsets.only(left: 20, top: 4),
               width: ContentsItemSize.width,
               height: isDesktop(context) ? 75 : ContentsItemSize.height,
               child: Center(
@@ -53,26 +62,29 @@ class ContentsSlider extends StatelessWidget {
                 scrollDirection:
                     isDesktop(context) ? Axis.vertical : Axis.horizontal,
                 controller: _scrollController,
-                child: Flex(
-                  textBaseline: TextBaseline.alphabetic,
-                  direction:
-                      isDesktop(context) ? Axis.vertical : Axis.horizontal,
-                  children: itemNames.asMap().entries.map((entry) {
-                    int priority = entry.key;
-                    String name = entry.value;
+                child: Container(
+                  padding: isDesktop(context)
+                      ? const EdgeInsets.only(bottom: 3.0)
+                      : const EdgeInsets.only(right: 3.0),
+                  child: Flex(
+                    textBaseline: TextBaseline.alphabetic,
+                    direction:
+                        isDesktop(context) ? Axis.vertical : Axis.horizontal,
+                    children: itemNames.asMap().entries.map((entry) {
+                      int priority = entry.key;
+                      String name = entry.value;
 
-                    return ContentsItem(
-                      name: name,
-                      headerName: headerName,
-                      priority: priority,
-                    );
-                  }).toList(),
+                      return ContentsItem(
+                        name: name,
+                        headerName: headerName,
+                        priority: priority,
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ),
           ]),
     );
   }
-
-
 }

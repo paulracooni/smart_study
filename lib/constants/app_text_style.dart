@@ -44,8 +44,8 @@ class AppTextStyle {
       fontFamily: "NotoSansKR",
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      letterSpacing: 1,
-      height: 24);
+      letterSpacing: 1
+  );
 
   static const TextStyle subTitle = TextStyle(
       fontFamily: "NotoSansKR",

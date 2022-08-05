@@ -32,7 +32,7 @@ class _ContentsItemState extends State<ContentsItem> {
   Widget build(BuildContext context) {
     ContentsBloc contentsBloc = ContentsBloc.read(context);
     bool isSelected = widget.priority ==
-        contentsBloc.contentsSelection.getIndexByHeaderName(widget.headerName);
+        contentsBloc.pickedInfo.getIndexByHeaderName(widget.headerName);
 
     return InkWell(
       onTap: () {
