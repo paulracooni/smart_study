@@ -1,10 +1,8 @@
-abstract class ContentsState {}
+import 'package:equatable/equatable.dart';
 
-class InitContentsState extends ContentsState {}
+class ContentsState {}
+class ContentsInitState extends ContentsState {}
+class IndexUpdatedState extends ContentsState {}
 
-class UpdatedLevelIndexState extends ContentsState {}
 
-class UpdatedBookIndexState extends ContentsState {}
-
-class UpdatedChapterIndexState extends ContentsState {}
 

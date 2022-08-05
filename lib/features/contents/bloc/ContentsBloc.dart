@@ -2,33 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_care/features/contents/bloc/ContentsEvent.dart';
 import 'package:smart_care/features/contents/bloc/ContentsState.dart';
-
-enum ContentHeaders {
-  level, book, chapter
-}
-
-class ContentsModel {
-  int? levelIndex;
-  int? bookIndex;
-  int? chapterIndex;
-}
+import 'package:smart_care/features/contents/domains/ContentsSelectionAPI.dart';
 
 class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
-  final value = ContentsModel();
+  final contentsSelection = ContentsSelectionAPI(authToken: "?????");
 
-  ContentsBloc() : super(InitContentsState()) {
-    on<UpdateLevelIndexEvent>((event, emit) {
-      value.levelIndex = event.levelIndex;
-      emit(UpdatedLevelIndexState());
+  ContentsBloc() : super(ContentsInitState()) {
+    on<UpdateIndexEvent>((event, emit) {
+      contentsSelection.updateIndexByHeaderName(
+          event.headerName, event.index
+      );
+      emit(IndexUpdatedState());
     });
-    on<UpdateBookIndexEvent>((event, emit) {
-      value.bookIndex = event.bookIndex;
-      emit(UpdatedBookIndexState());
-    });
-    on<UpdateChapterIndexEvent>((event, emit) {
-      value.chapterIndex = event.chapterIndex;
-      emit(UpdatedChapterIndexState());
-    });
+
   }
 
   static BlocProvider<ContentsBloc> get provider =>
@@ -39,4 +25,5 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
 
   static ContentsBloc read(BuildContext context) =>
       BlocProvider.of<ContentsBloc>(context, listen: true);
+
 }

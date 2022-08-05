@@ -1,16 +1,17 @@
-abstract class ContentsEvent {}
+// ignore_for_file: must_be_immutable
 
-class UpdateChapterIndexEvent extends ContentsEvent {
-  int chapterIndex;
-  UpdateChapterIndexEvent(this.chapterIndex);
+import 'package:equatable/equatable.dart';
+
+abstract class ContentsEvent extends Equatable {
+  @override
+  List<Object> get props => [];
 }
 
-class UpdateLevelIndexEvent extends ContentsEvent {
-  int levelIndex;
-  UpdateLevelIndexEvent(this.levelIndex);
-}
+class UpdateIndexEvent extends ContentsEvent {
+  String headerName;
+  int index;
+  UpdateIndexEvent(this.headerName, this.index);
 
-class UpdateBookIndexEvent extends ContentsEvent {
-  int bookIndex;
-  UpdateBookIndexEvent(this.bookIndex);
+  @override
+  List<Object> get props => [index, headerName];
 }

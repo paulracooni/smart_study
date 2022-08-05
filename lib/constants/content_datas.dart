@@ -34,7 +34,7 @@ const contentChapter = [
   "Chapter 13",
 ];
 
-const sentences = [
+const contentSentences = [
   "안녕",
   "너는보니?",
   "반갑다",

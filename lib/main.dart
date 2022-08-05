@@ -1,15 +1,13 @@
-import 'package:camera/camera.dart';
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart'
+    show PathUrlStrategy, setUrlStrategy;
 
 import 'common_widgets/home_page.dart';
 
-
-import 'features/contents/bloc/ContentsBloc.dart';
 import 'routes/route_name.dart';
 import 'routes/route_generator.dart';
 
@@ -17,14 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // cameras = await availableCameras(); // From video_screen.dart
-
-  runApp(MultiBlocProvider(
-    providers: [
-      NavBloc.provider,
-      ContentsBloc.provider,
-    ],
-    child: const MyApp(),
-  ));
+  runApp(const MyApp());
 
   setUrlStrategy(PathUrlStrategy()); // to remove # at url
 }
@@ -47,17 +38,12 @@ class MyApp extends StatelessWidget {
 
   ThemeData buildThemeData(BuildContext context,
       {Color seedColor = const Color(0xFF4DA4FD)}) {
-
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: seedColor,
         brightness: Brightness.light,
       ),
-      textTheme: GoogleFonts.notoSansNKoTextTheme(
-          Theme
-              .of(context)
-              .textTheme
-      ),
+      textTheme: GoogleFonts.notoSansNKoTextTheme(Theme.of(context).textTheme),
     );
   }
 }

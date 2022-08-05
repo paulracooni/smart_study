@@ -16,9 +16,6 @@ class RoutingPages {
       SideMenuItem(
         priority: 1,
         title: 'Recordings',
-
-
-
         onTap: () => pageController.jumpToPage(1),
         icon: const Icon(Icons.bookmark),
       ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:smart_care/features/onboard.dart';
+import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
 
 import 'route_name.dart';
 
@@ -9,7 +12,10 @@ class RouteGenerator {
 
       case RouteName.ONBOARD:
         return _GeneratePageRoute(
-          widget: const OnBoard(),
+          widget: BlocProvider(
+              create: (BuildContext context) => NavBloc(),
+              child: const OnBoard()
+          ),
           routeName: settings.name!,
         );
 

@@ -83,7 +83,7 @@ class _ContentViewState extends State<ContentView> {
                 "${contentLevels[levelController.value]} /"
                 "${contentBook[bookController.value]} /"
                 "${contentChapter[chapterController.value]}",
-            sentences: sentences,
+            sentences: contentSentences,
           ),
         )
       ],

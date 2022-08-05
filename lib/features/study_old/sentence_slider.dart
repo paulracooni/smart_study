@@ -26,7 +26,7 @@ class _SentenceSliderState extends State<SentenceSlider> {
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: sentences
+          children: contentSentences
               .asMap()
               .entries
               .map((entry) {

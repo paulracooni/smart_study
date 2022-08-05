@@ -7,11 +7,10 @@ import 'ContentsItem.dart';
 
 class ContentsSlider extends StatelessWidget {
   final String headerName;
-  final List<String> names;
+  final List<String> itemNames;
   final ScrollController _scrollController = ScrollController();
 
-  ContentsSlider(
-      {Key? key, required this.headerName, required this.names})
+  ContentsSlider({Key? key, required this.headerName, required this.itemNames})
       : super(key: key);
 
   bool isDesktop(context) {
@@ -21,6 +20,7 @@ class ContentsSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: isDesktop(context)
           ? const EdgeInsets.symmetric(horizontal: 3.0)
@@ -57,13 +57,14 @@ class ContentsSlider extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                   direction:
                       isDesktop(context) ? Axis.vertical : Axis.horizontal,
-                  children: names.asMap().entries.map((entry) {
+                  children: itemNames.asMap().entries.map((entry) {
                     int priority = entry.key;
                     String name = entry.value;
+
                     return ContentsItem(
                       name: name,
+                      headerName: headerName,
                       priority: priority,
-                      onTap: () {},
                     );
                   }).toList(),
                 ),
@@ -72,4 +73,6 @@ class ContentsSlider extends StatelessWidget {
           ]),
     );
   }
+
+
 }

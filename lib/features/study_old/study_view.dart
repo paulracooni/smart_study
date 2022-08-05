@@ -21,7 +21,7 @@ class _StudyViewState extends State<StudyView> {
   void initState() {
     super.initState();
 
-    studyController = StudyController(sentencesLength: sentences.length);
+    studyController = StudyController(sentencesLength: contentSentences.length);
     if (mounted) {
       // set controller SideMenuItem page controller callback
       studyController.addListener(() {
@@ -65,7 +65,7 @@ class _StudyViewState extends State<StudyView> {
               Expanded(
                 flex: 1,
                 child: SentenceSlider(
-                  sentences: sentences,
+                  sentences: contentSentences,
                 ),
               ),
             ],
