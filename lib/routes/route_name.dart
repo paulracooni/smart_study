@@ -5,6 +5,7 @@ class RouteName{
   static const String SIGNIN = '/signin';
 
   static const String ONBOARD = '/onboard';
+  static const String STUDY = '/onboard/study';
   static const String CONTENTS = '/contents_old';
   static const String CONTENTS_RECORDING = '/contents_old/recording';
 

@@ -4,6 +4,9 @@ import 'package:smart_care/constants/app_text_style.dart';
 import 'package:smart_care/constants/design/effects.dart';
 import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/contents/bloc/ContentsBloc.dart';
+import 'package:smart_care/routes/route_name.dart';
+
+import '../../study/StudyView.dart';
 
 class ContentsPreview extends StatelessWidget {
   static const double _headerHeight = 75;
@@ -77,7 +80,7 @@ class ContentsPreview extends StatelessWidget {
 
   Widget studyStartBtn(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right:25, bottom:40),
+      margin: const EdgeInsets.only(right: 25, bottom: 40),
       decoration: BoxDecoration(
         boxShadow: Effects.boxShadowEffect(context),
         borderRadius: const BorderRadius.all(
@@ -91,10 +94,13 @@ class ContentsPreview extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, RouteName.STUDY);
+        },
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     DisplayMode displayMode = MediaQuery.of(context).displayMode;

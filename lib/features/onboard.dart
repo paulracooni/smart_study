@@ -7,7 +7,7 @@ import 'package:smart_care/features/navigation/animated_nav_left.dart';
 import 'package:smart_care/features/navigation/animated_nav_bottom.dart';
 import 'package:smart_care/constants/display_mode.dart';
 
-import 'contents/contents.dart';
+import 'contents/ContentsView.dart';
 
 class OnBoard extends StatelessWidget {
   const OnBoard({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class OnBoard extends StatelessWidget {
       case 0:
         return BlocProvider(
           create: (BuildContext context) => ContentsBloc(),
-          child: const Contents(),
+          child: const ContentsView(),
         );
       case 1:
         return const Center(child: Text('Recordings'));

@@ -3,22 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:smart_care/features/onboard.dart';
 import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
+import 'package:smart_care/features/study/StudyView.dart';
+import 'package:smart_care/features/study/bloc/StudyBloc.dart';
+import 'package:smart_care/features/study/bloc/VideoUtils.dart';
 
 import 'route_name.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case RouteName.ONBOARD:
         return _GeneratePageRoute(
           widget: BlocProvider(
               create: (BuildContext context) => NavBloc(),
-              child: const OnBoard()
-          ),
+              child: const OnBoard()),
           routeName: settings.name!,
         );
-
+      case RouteName.STUDY:
+        return _GeneratePageRoute(
+          widget: BlocProvider(
+              create: (BuildContext context) => StudyBloc(),
+              child: const StudyView()),
+          routeName: settings.name!,
+        );
       default:
         return _GeneratePageRoute(
           widget: undefinedPage(settings.name!),

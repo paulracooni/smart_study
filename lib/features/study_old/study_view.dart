@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_care/common_widgets/buttons/back_btn.dart';
+import 'package:smart_care/common_widgets/buttons/BackBtn.dart';
 import 'package:smart_care/constants/content_datas.dart';
 import 'package:smart_care/features/study_old/video_screen.dart';
 
@@ -71,7 +71,7 @@ class _StudyViewState extends State<StudyView> {
             ],
           ),
         ),
-        const BackBtn(),
+        BackBtn(onTap: () {},),
       ]),
     );
   }

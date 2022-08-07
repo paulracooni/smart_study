@@ -6,14 +6,14 @@ import 'bloc/ContentsState.dart';
 import 'widgets/ContentsPicker.dart';
 import 'widgets/ContentsPreview.dart';
 
-class Contents extends StatefulWidget {
-  const Contents({Key? key}) : super(key: key);
+class ContentsView extends StatefulWidget {
+  const ContentsView({Key? key}) : super(key: key);
 
   @override
-  State<Contents> createState() => _ContentsState();
+  State<ContentsView> createState() => _ContentsViewState();
 }
 
-class _ContentsState extends State<Contents> {
+class _ContentsViewState extends State<ContentsView> {
   DisplayMode get displayMode {
     return MediaQuery.of(context).displayMode;
   }
