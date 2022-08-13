@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_care/constants/app_text_style.dart';
 import 'package:smart_care/constants/design/effects.dart';
 import 'package:smart_care/constants/display_mode.dart';
+import 'package:smart_care/features/study/bloc/StudyBloc.dart';
+import 'package:smart_care/features/study/bloc/StudyState.dart';
+import 'package:smart_care/features/study/models/StudyInfo.dart';
 
+import 'StudyController.dart';
 import 'VideoScreen.dart';
 
 class VideoVew extends StatelessWidget {
@@ -24,26 +29,52 @@ class VideoVew extends StatelessWidget {
     );
   }
 
+  String asDuration(int seconds) {
+    Duration duration = Duration(seconds: seconds);
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+
   Widget header(BuildContext context) {
-    return Container(
-      height: 70,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: Center(
-        child: Text(
-          "Video Header",
-          style: AppTextStyle.h5.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
+    return StudyBloc.consumer(
+        builder: (BuildContext context, StudyState state) {
+          StudyBloc studyBloc = StudyBloc.read(context);
+          StudyInfo studyInfo = studyBloc.studyInfo;
+      return Container(
+        height: 70,
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
         ),
-      ),
-    );
+        child: Stack(
+          alignment: AlignmentDirectional.centerEnd,
+          children: [
+            Center(
+              child: Text(
+                studyInfo.studyTitle,
+                style: AppTextStyle.h5.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            ),
+            Text(
+              state is! StudyInitState? asDuration(state.tickPeriod).toString() : "",
+              style: AppTextStyle.h5.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   @override
@@ -53,22 +84,18 @@ class VideoVew extends StatelessWidget {
       child: Column(
         children: [
           header(context),
-          const Expanded(
+          Expanded(
               child: Center(
-            child: VideoScreen(),
+            child: BlocBuilder<StudyBloc, StudyState>(
+              buildWhen: (previous, current) {
+                return false;
+              },
+              builder: (BuildContext context, StudyState state) {
+                return const VideoScreen();
+              },
+            ),
           )),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Row(
-              children: const [
-                Text("Button1"),
-                Text("Button2"),
-                Text("Button3"),
-              ],
-            ),
-          )
+          const StudyController(),
         ],
       ),
     );

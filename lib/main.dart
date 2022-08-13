@@ -15,7 +15,6 @@ import 'routes/route_generator.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   VideoUtils.cameras = await availableCameras();
-  print(VideoUtils.cameras);
   runApp(const MyApp());
 
   setUrlStrategy(PathUrlStrategy()); // to remove # at url
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       // debugShowCheckedModeBanner: false,
       builder: (context, child) => HomePage(child: child!),
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteName.STUDY,
+      initialRoute: RouteName.ONBOARD,
     );
   }
 

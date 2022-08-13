@@ -6,6 +6,7 @@ import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
 import 'package:smart_care/features/study/StudyView.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/VideoUtils.dart';
+import 'package:smart_care/features/study/models/StudyInfo.dart';
 
 import 'route_name.dart';
 
@@ -22,8 +23,11 @@ class RouteGenerator {
       case RouteName.STUDY:
         return _GeneratePageRoute(
           widget: BlocProvider(
-              create: (BuildContext context) => StudyBloc(),
-              child: const StudyView()),
+              create: (BuildContext context) => StudyBloc(
+                  studyInfo: settings.arguments! as StudyInfo
+              ),
+              child: const StudyView(),
+          ),
           routeName: settings.name!,
         );
       default:

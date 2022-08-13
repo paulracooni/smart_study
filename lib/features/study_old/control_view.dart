@@ -18,7 +18,7 @@ class ControlView extends StatelessWidget {
         //TODO: iterable -> List,Set을 만들기 전단계.
         ElevatedButton(
           style: controller.isRandomBtnActive
-              ? BtnStyles(context).active
+              ? BtnStyles(context).onPrimary
               : BtnStyles(context).inactive,
           onPressed: controller.isRandomBtnActive
               ? controller.toggleRandomMode
@@ -29,7 +29,7 @@ class ControlView extends StatelessWidget {
         ),
         ElevatedButton(
           style: controller.isSpeedBtnActive
-              ? BtnStyles(context).active
+              ? BtnStyles(context).onPrimary
               : BtnStyles(context).inactive,
           onPressed:
               controller.isSpeedBtnActive ? controller.toggleSpeedMode : () {},
@@ -59,7 +59,7 @@ class ControlView extends StatelessWidget {
       children: [
         ElevatedButton(
           style: controller.isPrevBtnActive
-              ? BtnStyles(context).active
+              ? BtnStyles(context).onPrimary
               : BtnStyles(context).inactive,
           onPressed: controller.isPrevBtnActive
               ? controller.subtractSentenceIndex
@@ -67,7 +67,7 @@ class ControlView extends StatelessWidget {
           child: const Icon(Icons.navigate_before_outlined),
         ),
         ElevatedButton(
-          style: BtnStyles(context).active,
+          style: BtnStyles(context).onPrimary,
           onPressed: controller.studyPause,
           child: controller.isPause
               ? const Icon(Icons.play_arrow)
@@ -76,13 +76,13 @@ class ControlView extends StatelessWidget {
         ElevatedButton(
           style: controller.isPause
               ? BtnStyles(context).inactive
-              : BtnStyles(context).active,
+              : BtnStyles(context).onPrimary,
           onPressed: controller.isPause ? () {} : controller.studyStop,
           child: const Icon(Icons.stop),
         ),
         ElevatedButton(
           style: controller.isNextBtnActive
-              ? BtnStyles(context).active
+              ? BtnStyles(context).onPrimary
               : BtnStyles(context).inactive,
           onPressed:
               controller.isNextBtnActive ? controller.addSentenceIndex : () {},
@@ -102,7 +102,7 @@ class ControlView extends StatelessWidget {
     return Row(
         children: [
       ElevatedButton(
-        style: BtnStyles(context).active,
+        style: BtnStyles(context).onPrimary,
         onPressed: controller.studyStart,
         child: const Icon(Icons.play_arrow),
       ),

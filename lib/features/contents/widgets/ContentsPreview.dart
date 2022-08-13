@@ -4,6 +4,7 @@ import 'package:smart_care/constants/app_text_style.dart';
 import 'package:smart_care/constants/design/effects.dart';
 import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/contents/bloc/ContentsBloc.dart';
+import 'package:smart_care/features/study/models/StudyInfo.dart';
 import 'package:smart_care/routes/route_name.dart';
 
 import '../../study/StudyView.dart';
@@ -79,6 +80,9 @@ class ContentsPreview extends StatelessWidget {
   }
 
   Widget studyStartBtn(BuildContext context) {
+    ContentsBloc contentsBloc = ContentsBloc.read(context);
+    List<String> sentences = contentsBloc.pickedInfo.sentences;
+    String headerName = contentsBloc.pickedInfo.getCurrentPick();
     return Container(
       margin: const EdgeInsets.only(right: 25, bottom: 40),
       decoration: BoxDecoration(
@@ -95,7 +99,13 @@ class ContentsPreview extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, RouteName.STUDY);
+          Navigator.pushNamed(
+              context,
+              RouteName.STUDY,
+              arguments: StudyInfo(
+                studyTitle: headerName,
+                paragraphs: sentences,
+              ));
         },
       ),
     );

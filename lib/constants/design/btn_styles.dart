@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_care/constants/app_text_style.dart';
 
 class BtnStyles{
 
@@ -11,18 +12,24 @@ class BtnStyles{
     return _instance;
   }
 
-  ButtonStyle get inactive {
+  ButtonStyle get onPrimary {
     return ElevatedButton.styleFrom(
-      primary: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      minimumSize: const Size(50, 50),
+      primary: Theme.of(context).colorScheme.onPrimary,
+      onPrimary: Theme.of(context).colorScheme.primary,
+      textStyle: AppTextStyle.button.copyWith(
+          color: Theme.of(context).colorScheme.primary
+      ),
     );
   }
 
-  ButtonStyle get active {
+  ButtonStyle get inactive {
     return ElevatedButton.styleFrom(
-      primary: Theme.of(context).colorScheme.primary,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      primary: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
     );
   }
+
+
 }
 

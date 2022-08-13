@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/StudyEvent.dart';
-import 'package:smart_care/features/study/bloc/StudyState.dart';
 import 'package:smart_care/features/study/bloc/VideoUtils.dart';
 
 // ignore: must_be_immutable
@@ -28,10 +27,10 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    StudyBloc studyBloc = StudyBloc.read(context);
     return FutureBuilder(
       future: VideoUtils.initCamera(
           callback: () {
+            StudyBloc studyBloc = StudyBloc.read(context);
             studyBloc.add(StudyReadyEvent());
           },
       ),
