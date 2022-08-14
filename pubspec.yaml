@@ -102,5 +102,8 @@ flutter:
         - asset: fonts/NotoSansKR-Medium.otf
         - asset: fonts/NotoSansKR-Regular.otf
         - asset: fonts/NotoSansKR-Thin.otf
+
+  assets:
+    - assets/dummy_datas.json
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

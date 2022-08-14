@@ -8,6 +8,10 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
   final pickedInfo = PickedInfo(authToken: "?????");
 
   ContentsBloc() : super(ContentsInitState()) {
+    on<InitializedEvent>((event, emit) {
+      emit(IndexUpdatedState());
+    });
+
     on<UpdateIndexEvent>((event, emit) {
       pickedInfo.updateIndexByHeaderName(
           event.headerName, event.index
@@ -15,6 +19,7 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
       emit(IndexUpdatedState());
     });
 
+    on<SelectPickEvent>(_selectPick);
   }
 
   static BlocProvider<ContentsBloc> get provider =>
@@ -26,4 +31,13 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
   static ContentsBloc read(BuildContext context) =>
       BlocProvider.of<ContentsBloc>(context, listen: true);
 
+  void _loadInitInfo(){
+
+  }
+  void _selectPick(SelectPickEvent event, Emitter<ContentsState> emit) {
+    emit(ContentsInitState());
+
+
+    emit(IndexUpdatedState());
+  }
 }

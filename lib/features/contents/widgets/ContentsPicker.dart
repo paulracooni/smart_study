@@ -14,20 +14,27 @@ class ContentsPicker extends StatelessWidget {
     ContentsBloc contentsBloc = ContentsBloc.read(context);
 
     return Flex(
-      direction:
-          displayMode == DisplayMode.DESKTOP ? Axis.horizontal : Axis.vertical,
+      direction: Axis.horizontal,
+      // direction:
+      // displayMode == DisplayMode.DESKTOP ? Axis.horizontal : Axis.vertical,
       children: [
-        ContentsSlider(
-          headerName: ContentsSelectionHeader.level,
-          itemNames: contentsBloc.pickedInfo.levels,
+        Expanded(
+          child: ContentsSlider(
+            headerName: ContentsSelectionHeader.level,
+            itemNames: contentsBloc.pickedInfo.levels,
+          ),
         ),
-        ContentsSlider(
-          headerName: ContentsSelectionHeader.book,
-          itemNames: contentsBloc.pickedInfo.books,
+        Expanded(
+          child: ContentsSlider(
+            headerName: ContentsSelectionHeader.book,
+            itemNames: contentsBloc.pickedInfo.books,
+          ),
         ),
-        ContentsSlider(
-          headerName: ContentsSelectionHeader.chapter,
-          itemNames: contentsBloc.pickedInfo.chapters,
+        Expanded(
+          child: ContentsSlider(
+            headerName: ContentsSelectionHeader.chapter,
+            itemNames: contentsBloc.pickedInfo.chapters,
+          ),
         ),
       ],
     );

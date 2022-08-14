@@ -33,3 +33,17 @@ class TickedEvent extends StudyEvent {
   @override
   List<Object> get props => [tickPeriod];
 }
+
+class RemainTickedEvent extends StudyEvent {
+  final int tickPeriod;
+  const RemainTickedEvent({required this.tickPeriod});
+
+  @override
+  List<Object> get props => [tickPeriod];
+}
+
+class NextParagraphByTimerEvent extends StudyEvent {}
+
+class NextParagraphEvent extends StudyEvent {}
+
+class PreviousParagraphEvent extends StudyEvent {}

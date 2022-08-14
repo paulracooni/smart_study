@@ -4,6 +4,7 @@ class StudyInfo {
   List<String> _originParagraphs = [];
 
   StudyInfo({required this.studyTitle, required this.paragraphs}) {
+    paragraphs = List<String>.from(paragraphs);
      _originParagraphs = List<String>.from(paragraphs);
   }
 

@@ -17,9 +17,10 @@ class VideoVew extends StatelessWidget {
     DisplayMode displayMode = MediaQuery.of(context).displayMode;
     bool isDesktop = displayMode == DisplayMode.DESKTOP;
     return Container(
-      margin: isDesktop
-          ? const EdgeInsets.only(right: 5)
-          : const EdgeInsets.only(bottom: 5),
+      // margin: isDesktop
+      //     ? const EdgeInsets.only(right: 5)
+      //     : const EdgeInsets.only(bottom: 5),
+      margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
         color: Colors.black,
         boxShadow: Effects.boxShadowEffect(context),

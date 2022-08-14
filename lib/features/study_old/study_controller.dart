@@ -89,8 +89,6 @@ class StudyController {
       _isPauseNotifier.value = false;
       startVideoRecording();
     }
-
-
   }
 
   void studyStop() {

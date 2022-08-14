@@ -45,7 +45,7 @@ class _ContentsItemState extends State<ContentsItem> {
       hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
       child: Container(
-        width: ContentsItemSize.width,
+        width: double.infinity,
         height: ContentsItemSize.height,
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         margin: const EdgeInsets.all(5),

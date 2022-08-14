@@ -15,3 +15,16 @@ class UpdateIndexEvent extends ContentsEvent {
   @override
   List<Object> get props => [index, headerName];
 }
+
+class SelectPickEvent extends ContentsEvent {
+  String headerName;
+  String itemName;
+  SelectPickEvent(this.headerName, this.itemName);
+
+  @override
+  List<Object> get props => [headerName, itemName];
+}
+
+class InitializedEvent extends ContentsEvent {
+
+}
