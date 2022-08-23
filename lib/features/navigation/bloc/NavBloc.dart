@@ -12,7 +12,7 @@ class NavBloc extends Bloc<NavEvent, NavState> {
 
   NavBloc() : super(InitNavState()) {
     on<UpdateNavIndexEvent>((event, emit) {
-      navModel.navIndex = event.navIndex;
+      navModel.navIndex = 0;#event.navIndex;
       emit(UpdatedNavIndexState());
     });
   }

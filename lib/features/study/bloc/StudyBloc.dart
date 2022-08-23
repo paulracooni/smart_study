@@ -74,8 +74,11 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
   static StudyBloc read(BuildContext context) =>
       BlocProvider.of<StudyBloc>(context, listen: true);
 
-  void _startStudy(StudyStartEvent event, Emitter<StudyState> emit) {
+  void _startStudy(StudyStartEvent event, Emitter<StudyState> emit) async {
     // remainTime = state.speed;
+
+    VideoUtils.clear();
+    await VideoUtils.startVideoRecording();
 
     emit(StudyStartState(
       seqRandMode: state.seqRandMode,
@@ -84,7 +87,7 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
       paragraphIndex: 0,
     ));
 
-    VideoUtils.startVideoRecording();
+
     paragraphUtil.resetScroll();
     recordingTimer
         .start((tickPeriod) => add(TickedEvent(tickPeriod: tickPeriod)));
@@ -92,9 +95,9 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
     _initNextParagraphTimer();
   }
 
-  void _pauseStudy(StudyPauseEvent event, Emitter<StudyState> emit) {
+  void _pauseStudy(StudyPauseEvent event, Emitter<StudyState> emit) async {
     if (state is StudyStartState) {
-      VideoUtils.pauseVideoRecording();
+      await VideoUtils.pauseVideoRecording();
       recordingTimer.pause();
       // remainTimer.pause();
       nextParagraphTimer.pause();
@@ -107,9 +110,9 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
     }
   }
 
-  void _restartStudy(StudyRestartEvent event, Emitter<StudyState> emit) {
+  void _restartStudy(StudyRestartEvent event, Emitter<StudyState> emit) async {
     if (state is StudyPauseState) {
-      VideoUtils.resumeVideoRecording();
+      await VideoUtils.resumeVideoRecording();
       recordingTimer.resume();
       _initNextParagraphTimer();
       emit(StudyStartState(
@@ -121,10 +124,10 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
     }
   }
 
-  void _stopStudy(StudyStopEvent event, Emitter<StudyState> emit) {
+  void _stopStudy(StudyStopEvent event, Emitter<StudyState> emit) async {
     // remainTime = state.speed;
     if (state is StudyStartState || state is StudyPauseState) {
-      VideoUtils.stopVideoRecording();
+      await VideoUtils.stopVideoRecording();
       // remainTimer.cancel();
       recordingTimer.cancel();
       nextParagraphTimer.cancel();
@@ -138,9 +141,9 @@ class StudyBloc extends Bloc<StudyEvent, StudyState> {
     }
   }
 
-  void _completeStudy(StudyCompleteEvent event, Emitter<StudyState> emit) {
+  void _completeStudy(StudyCompleteEvent event, Emitter<StudyState> emit) async {
     if (state is StudyStartState) {
-      VideoUtils.stopVideoRecording();
+      await VideoUtils.stopVideoRecording();
       // remainTimer.cancel();
       recordingTimer.cancel();
       nextParagraphTimer.cancel();

@@ -61,7 +61,7 @@ class ContentsSlider extends StatelessWidget {
           return Container(
             margin: isDesktop(context)
                 ? const EdgeInsets.symmetric(horizontal: 3.0)
-                : const EdgeInsets.fromLTRB(3.0, 0, 3.0, 3.0),
+                : const EdgeInsets.fromLTRB(3.0, 3.0, 3.0, 3.0),
             decoration: BoxDecoration(
               color: Theme
                   .of(context)
@@ -84,14 +84,21 @@ class ContentsSlider extends StatelessWidget {
                 children: [
                   Container(
                     padding: isDesktop(context)
-                        ? const EdgeInsets.only(top: 25)
-                        : const EdgeInsets.only(left: 20, top: 4),
+                        ? const EdgeInsets.only(bottom: 8)
+                        : const EdgeInsets.only(top: 0),
                     // width: ContentsItemSize.width,
                     height: isDesktop(context) ? 75 : ContentsItemSize.height,
                     child: Center(
                       child: Text(
                         headerName,
-                        style: AppTextStyle.h6.copyWith(
+                        style: isDesktop(context) ?
+                        AppTextStyle.h6.copyWith(
+                          color: Theme
+                              .of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
+                        ):AppTextStyle.h6.copyWith(
+                          fontSize: 16,
                           color: Theme
                               .of(context)
                               .colorScheme

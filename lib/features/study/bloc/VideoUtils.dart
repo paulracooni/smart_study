@@ -32,21 +32,21 @@ class VideoUtils {
     }
   }
 
-  static void startVideoRecording() async {
+  static Future<void> startVideoRecording() async {
     if (cameraController!.value.isRecordingVideo == false) {
       await cameraController!.startVideoRecording();
       videoFile = null;
     }
   }
 
-  static void stopVideoRecording() async {
+  static Future<void> stopVideoRecording() async {
     if (cameraController!.value.isRecordingVideo == true) {
       videoFile = await cameraController!.stopVideoRecording();
       // html.window.open(videoFile.path, "_blank");
     }
   }
 
-  static void pauseVideoRecording() async {
+  static Future<void> pauseVideoRecording() async {
     if (cameraController!.value.isRecordingVideo == true) {
       await cameraController!.pauseVideoRecording();
     }
@@ -56,9 +56,13 @@ class VideoUtils {
     return videoFile!;
   }
 
-  static void resumeVideoRecording() async {
+  static Future<void> resumeVideoRecording() async {
     if (cameraController!.value.isRecordingPaused == true) {
       await cameraController!.resumeVideoRecording();
     }
+  }
+
+  static void clear() {
+    videoFile = null;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_care/constants/app_text_style.dart';
 import 'package:smart_care/constants/design/btn_styles.dart';
+import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/StudyEvent.dart';
 import 'package:smart_care/features/study/bloc/StudyState.dart';
@@ -8,6 +10,17 @@ import 'package:universal_html/html.dart';
 
 class StudyController extends StatelessWidget {
   const StudyController({Key? key}) : super(key: key);
+
+  TextStyle buildBtnStyle(BuildContext context) {
+    DisplayMode displayMode = MediaQuery.of(context).displayMode;
+    bool isDesktop = displayMode == DisplayMode.DESKTOP;
+    TextStyle btnStyle = isDesktop
+        ? AppTextStyle.button
+        : AppTextStyle.button.copyWith(
+            fontSize: 12,
+          );
+    return btnStyle;
+  }
 
   Widget layout(BuildContext context, {required Widget child}) {
     return Container(
@@ -34,6 +47,7 @@ class StudyController extends StatelessWidget {
 
   Widget btnStudyModeSelector(BuildContext context, StudyState state) {
     StudyBloc studyBloc = StudyBloc.read(context);
+
     return Row(
       children: [
         if (state is! StudyPauseState)
@@ -42,14 +56,20 @@ class StudyController extends StatelessWidget {
               studyBloc.add(ClickSeqRandBtnEvent());
             },
             style: BtnStyles(context).onPrimary,
-            child: Text(state.seqRandMode),
+            child: Text(
+              state.seqRandMode,
+              style: buildBtnStyle(context),
+            ),
           ),
         controlBtn(
           onPressed: () {
             studyBloc.add(ClickSpeedBtnEvent());
           },
           style: BtnStyles(context).onPrimary,
-          child: Text("Speed ${state.speed} 초"),
+          child: Text(
+            "Speed ${state.speed} 초",
+            style: buildBtnStyle(context),
+          ),
         ),
       ],
     );
@@ -65,7 +85,10 @@ class StudyController extends StatelessWidget {
           onPressed: () {
             studyBloc.add(StudyStartEvent());
           },
-          child: const Text("시작하기"),
+          child: Text(
+            "시작하기",
+            style: buildBtnStyle(context),
+          ),
           style: BtnStyles(context).onPrimary,
         ),
       ],
@@ -137,14 +160,20 @@ class StudyController extends StatelessWidget {
           onPressed: () {
             studyBloc.add(StudyStartEvent());
           },
-          child: const Text("다시하기"),
+          child: Text(
+            "다시하기",
+            style: buildBtnStyle(context),
+          ),
           style: BtnStyles(context).onPrimary,
         ),
         controlBtn(
           onPressed: () {
             studyBloc.add(StudyUploadEvent());
           },
-          child: const Text("다운로드"),
+          child: Text(
+            "다운로드",
+            style: buildBtnStyle(context),
+          ),
           style: BtnStyles(context).onPrimary,
         ),
       ],
@@ -196,7 +225,7 @@ class StudyController extends StatelessWidget {
             child: layout(context, child: buttonSetWidget),
             onKey: (event) {
               if (event is RawKeyDownEvent) {
-                // ON Every State
+                // ON Every Stat
                 if (event.isKeyPressed(LogicalKeyboardKey.backspace)) {
                   if (Navigator.of(context).canPop()) {
                     Navigator.of(context).pop();

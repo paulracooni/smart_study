@@ -30,7 +30,6 @@ class OnBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DisplayMode displayMode = MediaQuery.of(context).displayMode;
     NavBloc bloc = NavBloc.read(context);
     return NavBloc.consumer(builder: (BuildContext context, NavState state) {
       return Stack(

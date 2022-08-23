@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_care/constants/app_text_style.dart';
+import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/StudyEvent.dart';
 import 'package:smart_care/features/study/bloc/StudyState.dart';
@@ -33,11 +34,13 @@ class _VideoScreenState extends State<VideoScreen> {
             StudyBloc studyBloc = StudyBloc.read(context);
 
             int index = state.paragraphIndex;
-            int maxIndex = studyBloc.paragraphUtil.itemsCount-1 as int;
-            index = maxIndex > index ? index: maxIndex;
+            int maxIndex = studyBloc.paragraphUtil.itemsCount - 1;
+            index = maxIndex > index ? index : maxIndex;
 
-            String paragraph = studyBloc
-                .studyInfo.paragraphs[index];
+            String paragraph = studyBloc.studyInfo.paragraphs[index];
+
+            DisplayMode displayMode = MediaQuery.of(context).displayMode;
+            bool isMobile = displayMode == DisplayMode.MOBILE;
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -50,7 +53,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   child: Text(
                     paragraph,
                     style: AppTextStyle.body.copyWith(
-                      fontSize: 24,
+                      fontSize: isMobile? 16:24,
                       color: Colors.white,
                     ),
                   ),
@@ -67,15 +70,10 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: VideoUtils.initCamera(
-        callback: () {
-          StudyBloc studyBloc = StudyBloc.read(context);
-          studyBloc.add(StudyReadyEvent());
-        },
+          callback: () {},
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // studyBloc.add(StudyReadyEvent());
-          // print(VideoUtils.isCameraInitialized);
           return CameraPreview(
             VideoUtils.cameraController!,
             child: paragraphCaption(),

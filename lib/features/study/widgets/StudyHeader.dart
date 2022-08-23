@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/app_text_style.dart';
+import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/StudyState.dart';
 import 'package:smart_care/features/study/models/StudyInfo.dart';
@@ -17,10 +18,12 @@ class StudyHeader extends StatelessWidget {
 
   Widget onStudyInfo() => StudyBloc.consumer(
         builder: (BuildContext context, StudyState state) {
+          DisplayMode displayMode = MediaQuery.of(context).displayMode;
+          bool isMobile = displayMode == DisplayMode.MOBILE;
           StudyBloc studyBloc = StudyBloc.read(context);
           TextStyle infoStyle = AppTextStyle.body.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
-          );
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: isMobile ? 12 : 16);
           return Row(
             children: [
               const Spacer(),
@@ -47,9 +50,9 @@ class StudyHeader extends StatelessWidget {
         },
       );
 
-  String _parseHeaderTitle(String studyTitle){
+  String _parseHeaderTitle(String studyTitle) {
     List<String> headerTitles = studyTitle.split('/');
-    if(headerTitles.length==1) {
+    if (headerTitles.length == 1) {
       return studyTitle;
     }
     String headerTitle = headerTitles[2];
@@ -58,7 +61,7 @@ class StudyHeader extends StatelessWidget {
 
   String _parseHeaderSubTitle(String studyTitle) {
     List<String> headerTitles = studyTitle.split('/');
-    if(headerTitles.length==1) {
+    if (headerTitles.length == 1) {
       return '';
     }
     String book = headerTitles[0].replaceAll(' ', '');
@@ -74,6 +77,8 @@ class StudyHeader extends StatelessWidget {
       StudyInfo studyInfo = studyBloc.studyInfo;
       String headerTitle = _parseHeaderTitle(studyInfo.studyTitle);
       String headerSubTitle = _parseHeaderSubTitle(studyInfo.studyTitle);
+      DisplayMode displayMode = MediaQuery.of(context).displayMode;
+      bool isMobile = displayMode == DisplayMode.MOBILE;
       return Container(
         height: 70,
         width: double.infinity,
@@ -91,14 +96,14 @@ class StudyHeader extends StatelessWidget {
                     headerSubTitle,
                     style: AppTextStyle.body.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 10,
+                      fontSize: isMobile ? 8 : 10,
                     ),
                   ),
                   Text(
                     headerTitle,
                     style: AppTextStyle.h5.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 24,
+                      fontSize: isMobile ? 16 : 24,
                     ),
                   ),
                 ],

@@ -7,7 +7,6 @@ import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/study/bloc/StudyState.dart';
 import 'package:smart_care/features/study/widgets/StudyController.dart';
 import 'package:smart_care/features/study/widgets/StudyHeader.dart';
-import 'package:smart_care/features/study/widgets/VideoView.dart';
 
 import 'bloc/StudyBloc.dart';
 import 'bloc/StudyEvent.dart';
@@ -15,15 +14,29 @@ import 'models/StudyInfo.dart';
 import 'widgets/ParagraphView.dart';
 import 'widgets/VideoScreen.dart';
 
-class StudyView extends StatelessWidget {
+class StudyView extends StatefulWidget {
   const StudyView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    DisplayMode displayMode = MediaQuery.of(context).displayMode;
-    bool isDesktop = displayMode == DisplayMode.DESKTOP;
-    StudyBloc studyBloc = StudyBloc.read(context);
+  State<StudyView> createState() => _StudyViewState();
+}
 
+class _StudyViewState extends State<StudyView> {
+
+
+  Widget backBtn() => StudyBloc.consumer(
+        builder: (BuildContext context, StudyState state) {
+          StudyBloc studyBloc = StudyBloc.read(context);
+          return BackBtn(
+            onTap: () {
+              studyBloc.add(StudyStopEvent());
+            },
+          );
+        },
+      );
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
@@ -35,15 +48,15 @@ class StudyView extends StatelessWidget {
               const StudyHeader(),
               Expanded(
                 flex: 2,
-                child: Center(
-                  child: BlocBuilder<StudyBloc, StudyState>(
-                    buildWhen: (previous, current) {
-                      return false;
-                    },
-                    builder: (BuildContext context, StudyState state) {
-                      return const VideoScreen();
-                    },
-                  ),
+                child: BlocBuilder<StudyBloc, StudyState>(
+                  builder: (BuildContext context, StudyState state) {
+                    return const Center(
+                      child: VideoScreen(),
+                    );
+                  },
+                  buildWhen: (previous, current) {
+                    return false;
+                  },
                 ),
               ),
               const Expanded(
@@ -54,11 +67,7 @@ class StudyView extends StatelessWidget {
             ],
           ),
         ),
-        BackBtn(
-          onTap: () {
-            studyBloc.add(StudyStopEvent());
-          },
-        ),
+        backBtn(),
       ],
     );
   }

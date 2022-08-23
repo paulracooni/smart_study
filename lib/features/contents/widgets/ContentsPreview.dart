@@ -17,12 +17,15 @@ class ContentsPreview extends StatelessWidget {
   const ContentsPreview({Key? key}) : super(key: key);
 
   Widget header(BuildContext context) {
+    DisplayMode displayMode = MediaQuery.of(context).displayMode;
+    bool isDesktop = displayMode == DisplayMode.DESKTOP;
+
     ContentsBloc contentsBloc = ContentsBloc.read(context);
     String headerName = contentsBloc.pickedInfo.getCurrentPick();
     List<String> sentences = contentsBloc.pickedInfo.sentences;
     return Container(
       width: double.infinity,
-      height: _headerHeight,
+      height: isDesktop ? _headerHeight : 50,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
@@ -39,7 +42,11 @@ class ContentsPreview extends StatelessWidget {
               Center(
                 child: Text(
                   headerName,
-                  style: AppTextStyle.h6,
+                  style: isDesktop
+                      ? AppTextStyle.h6
+                      : AppTextStyle.h6.copyWith(
+                          fontSize: 16,
+                        ),
                 ),
               ),
               const Spacer(),
@@ -50,10 +57,10 @@ class ContentsPreview extends StatelessWidget {
               const Spacer(),
               Center(
                 child: Text(
-                  "# Sentences: ${sentences.length}",
+                  "${sentences.length}개 문장",
                   style: AppTextStyle.h6.copyWith(
-                    fontWeight: FontWeight.w300,
-                  ),
+                      fontWeight: FontWeight.w300,
+                      fontSize: isDesktop ? 20 : 16),
                 ),
               ),
             ],
@@ -95,12 +102,16 @@ class ContentsPreview extends StatelessWidget {
   }
 
   Widget studyStartBtn(BuildContext context) {
+    DisplayMode displayMode = MediaQuery.of(context).displayMode;
+    bool isMobile = displayMode == DisplayMode.MOBILE;
     ContentsBloc contentsBloc = ContentsBloc.read(context);
     List<String> sentences = contentsBloc.pickedInfo.sentences;
     String headerName = contentsBloc.pickedInfo.getCurrentPick();
 
     return Container(
-      margin: const EdgeInsets.only(right: 25, bottom: 40),
+      margin: isMobile
+          ? const EdgeInsets.only(right: 15, bottom: 15)
+          : const EdgeInsets.only(right: 25, bottom: 40),
       decoration: BoxDecoration(
         boxShadow: Effects.boxShadowEffect(context),
         borderRadius: const BorderRadius.all(
@@ -140,12 +151,12 @@ class ContentsPreview extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const SizedBox(
-                      height: _headerHeight - 10,
+                    SizedBox(
+                      height: isDesktop ? _headerHeight - 10 : 45,
                     ),
                     Expanded(
                       child: state is IndexUpdatedState
-                          ?preview(context)
+                          ? preview(context)
                           : const Center(child: CircularProgressIndicator()),
                     )
                   ],
@@ -155,8 +166,7 @@ class ContentsPreview extends StatelessWidget {
                   children: [
                     header(context),
                     const Spacer(),
-                    if (state is IndexUpdatedState)
-                      studyStartBtn(context),
+                    if (state is IndexUpdatedState) studyStartBtn(context),
                   ],
                 ),
               ],

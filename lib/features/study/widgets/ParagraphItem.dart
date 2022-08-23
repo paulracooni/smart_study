@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_care/constants/app_text_style.dart';
+import 'package:smart_care/constants/display_mode.dart';
 import 'package:smart_care/features/study/bloc/StudyBloc.dart';
 import 'package:smart_care/features/study/bloc/StudyState.dart';
 
@@ -17,6 +18,8 @@ class ParagraphItem extends StatelessWidget {
           // print(state);
           bool selected = state.paragraphIndex == priority;
           double height = StudyBloc.read(context).paragraphUtil.itemHeight;
+          DisplayMode displayMode = MediaQuery.of(context).displayMode;
+          bool isMobile = displayMode == DisplayMode.MOBILE;
 
           return AnimatedContainer(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -34,7 +37,7 @@ class ParagraphItem extends StatelessWidget {
               style: selected
                   ? AppTextStyle.body.copyWith(
                       color: Theme.of(context).colorScheme.onSecondary,
-                      fontSize: 32,
+                      fontSize: isMobile ? 20 : 32,
                       fontWeight: FontWeight.w900,
                     )
                   : AppTextStyle.body.copyWith(
@@ -42,7 +45,7 @@ class ParagraphItem extends StatelessWidget {
                           .colorScheme
                           .onBackground
                           .withOpacity(0.7),
-                      fontSize: 26,
+                      fontSize: isMobile ? 16 : 26,
                       fontWeight: FontWeight.w300,
                     ),
             ),
