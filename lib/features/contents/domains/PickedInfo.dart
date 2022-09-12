@@ -47,6 +47,7 @@ class PickedInfo extends Equatable {
     String chapterKey = _chapters[_indexChapter];
 
     _sentences = List<String>.from(_datas[levelKey][bookKey][chapterKey]);
+
   }
 
   // @TODO API 정의 시, UserID로 컨텐츠 갱신

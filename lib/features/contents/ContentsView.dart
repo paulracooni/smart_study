@@ -22,6 +22,8 @@ class _ContentsViewState extends State<ContentsView> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDesktop = DisplayMode.DESKTOP == MediaQuery.of(context).displayMode;
+
     return ContentsBloc.consumer(
       builder: (BuildContext context, ContentsState state) {
         ContentsBloc contentsBloc = ContentsBloc.read(context);
@@ -37,13 +39,13 @@ class _ContentsViewState extends State<ContentsView> {
               ? Axis.horizontal
               : Axis.vertical,
           // direction: Axis.horizontal,
-          children: const [
+          children: [
             Expanded(
-              flex: 3,
-              child: ContentsPicker(),
+              flex: isDesktop?3:2,
+              child: const ContentsPicker(),
             ),
-            Expanded(
-              flex: 4,
+            const Expanded(
+              flex: 5,
               child: ContentsPreview(),
             ),
           ],
