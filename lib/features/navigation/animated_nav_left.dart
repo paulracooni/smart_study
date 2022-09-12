@@ -40,7 +40,6 @@ class _AnimatedNavLeftState extends State<AnimatedNavLeft> {
 
   @override
   Widget build(BuildContext context) {
-    NavBloc navBloc = NavBloc.read(context);
 
     return AnimatedContainer(
       decoration: BoxDecoration(

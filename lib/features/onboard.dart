@@ -5,7 +5,6 @@ import 'package:smart_care/features/navigation/bloc/NavBloc.dart';
 import 'package:smart_care/features/navigation/bloc/NavState.dart';
 import 'package:smart_care/features/navigation/animated_nav_left.dart';
 import 'package:smart_care/features/navigation/animated_nav_bottom.dart';
-import 'package:smart_care/constants/display_mode.dart';
 
 import 'contents/ContentsView.dart';
 
@@ -16,11 +15,16 @@ class OnBoard extends StatelessWidget {
     switch (navIndex) {
       case 0:
         return BlocProvider(
-          create: (BuildContext context) => ContentsBloc(),
-          child: const ContentsView(),
+          create: (BuildContext context) =>
+              ContentsBloc(),
+          child: const ContentsView(viewMode: ViewMode.practice),
         );
       case 1:
-        return const Center(child: Text('Recordings'));
+        return BlocProvider(
+          create: (BuildContext context) =>
+              ContentsBloc(),
+          child: const ContentsView(viewMode: ViewMode.test),
+        );
       case 2:
         return const Center(child: Text('My Page'));
       default:

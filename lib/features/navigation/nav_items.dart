@@ -14,17 +14,22 @@ class NavItem {
 const List<NavItem> navItems = [
   NavItem(
     icon: Icons.home,
-    name: "Contents",
+    name: "Practice",
     navIndex: 0,
+  ),
+  NavItem(
+    icon: Icons.home,
+    name: "Test",
+    navIndex: 1,
   ),
   NavItem(
     icon: Icons.bookmark,
     name: "Recordings",
-    navIndex: 1,
+    navIndex: 2,
   ),
   NavItem(
     icon: Icons.person,
     name: "My Page",
-    navIndex: 2,
+    navIndex: 3,
   ),
 ];

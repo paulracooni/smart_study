@@ -10,7 +10,9 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
   final pickedInfo = PickedInfo(authToken: "?????");
   final sentencesSelector = DragSelectGridViewController();
 
+
   ContentsBloc() : super(ContentsInitState()) {
+
     on<InitializedEvent>(_emitIndexUpdatedState);
     on<SentenceSelectEvent>(_emitIndexUpdatedState);
     on<UpdateIndexEvent>(_updateIndexHandler);
@@ -18,14 +20,12 @@ class ContentsBloc extends Bloc<ContentsEvent, ContentsState> {
     on<SelectSentencesRandomlyEvent>(_randomlySentencesSelectHandler);
     on<SelectAllSentencesEvent>(_selectAllSentencesHandler);
     on<DeselectAllSentencesEvent>(_deselectAllSentencesHandler);
+
     _initSentenceSelector();
     sentencesSelector.addListener(() {
       add(SentenceSelectEvent(Random().nextInt(9999)));
     });
   }
-
-  static BlocProvider<ContentsBloc> get provider =>
-      BlocProvider<ContentsBloc>(create: (context) => ContentsBloc());
 
   static Widget consumer({required BlocWidgetBuilder<ContentsState> builder}) =>
       BlocBuilder<ContentsBloc, ContentsState>(builder: builder);

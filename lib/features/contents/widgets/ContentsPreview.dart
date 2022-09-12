@@ -8,6 +8,7 @@ import 'package:smart_care/common_widgets/buttons/GradientBtn.dart';
 import 'package:smart_care/constants/app_text_style.dart';
 import 'package:smart_care/constants/design/effects.dart';
 import 'package:smart_care/constants/display_mode.dart';
+import 'package:smart_care/features/contents/ContentsView.dart';
 import 'package:smart_care/features/contents/bloc/ContentsBloc.dart';
 import 'package:smart_care/features/contents/bloc/ContentsEvent.dart';
 import 'package:smart_care/features/contents/bloc/ContentsState.dart';
@@ -17,9 +18,10 @@ import 'package:smart_care/routes/route_name.dart';
 import '../../study/StudyView.dart';
 
 class ContentsPreview extends StatefulWidget {
-  static const double _headerHeight = 100;
 
-  const ContentsPreview({Key? key}) : super(key: key);
+  static const double _headerHeight = 100;
+  final ViewMode viewMode;
+  const ContentsPreview({Key? key, required this.viewMode}) : super(key: key);
 
   @override
   State<ContentsPreview> createState() => _ContentsPreviewState();
@@ -137,7 +139,7 @@ class _ContentsPreviewState extends State<ContentsPreview> {
         crossAxisCount: 1, //1 개의 행에 보여줄 item 개수
         childAspectRatio: displayMode == DisplayMode.DESKTOP
             ? aspectRatio * 10
-            : aspectRatio * 18, //item 의 가로 1, 세로 2 의 비율
+            : aspectRatio * 24, //item 의 가로 1, 세로 2 의 비율
         mainAxisSpacing: 2, //수평 Padding
         crossAxisSpacing: 2, //수직 Padding
       ),
@@ -173,7 +175,6 @@ class _ContentsPreviewState extends State<ContentsPreview> {
     DisplayMode displayMode = MediaQuery.of(context).displayMode;
     bool isMobile = displayMode == DisplayMode.MOBILE;
     ContentsBloc contentsBloc = ContentsBloc.read(context);
-    List<String> sentences = contentsBloc.pickedInfo.sentences;
     String headerName = contentsBloc.pickedInfo.getCurrentPick();
 
     return Container(
@@ -187,16 +188,21 @@ class _ContentsPreviewState extends State<ContentsPreview> {
         ),
       ),
       child: GradientBtn(
-        onPressed: () => Navigator.pushNamed(
-          context,
-          RouteName.STUDY,
-          arguments: StudyInfo(
-            studyTitle: headerName,
-            paragraphs: contentsBloc.selectedSentences,
-          ),
-        ),
+        onPressed: () {
+          if(contentsBloc.selectedSentences.isNotEmpty) {
+            Navigator.pushNamed(
+              context,
+              RouteName.STUDY,
+              arguments: StudyInfo(
+                studyTitle: headerName,
+                paragraphs: contentsBloc.selectedSentences,
+              ),
+            );
+          }
+        },
         child: Text(
-          "학습 시작하기",
+          widget.viewMode == ViewMode.practice?
+          "연습 시작하기": "시험 시작하기",
           style: AppTextStyle.button.copyWith(
             color: Colors.white,
           ),

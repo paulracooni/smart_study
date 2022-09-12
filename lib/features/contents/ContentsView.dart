@@ -8,8 +8,14 @@ import 'bloc/ContentsState.dart';
 import 'widgets/ContentsPicker.dart';
 import 'widgets/ContentsPreview.dart';
 
+enum ViewMode {
+  practice, test
+}
+
 class ContentsView extends StatefulWidget {
-  const ContentsView({Key? key}) : super(key: key);
+  final ViewMode viewMode;
+  const ContentsView({Key? key, required this.viewMode}) : super(key: key);
+
 
   @override
   State<ContentsView> createState() => _ContentsViewState();
@@ -44,9 +50,9 @@ class _ContentsViewState extends State<ContentsView> {
               flex: isDesktop?3:2,
               child: const ContentsPicker(),
             ),
-            const Expanded(
+            Expanded(
               flex: 5,
-              child: ContentsPreview(),
+              child: ContentsPreview(viewMode: widget.viewMode,),
             ),
           ],
         );
